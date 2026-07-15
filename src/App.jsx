@@ -22,9 +22,7 @@ function App() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const productRef = await axios.get(
-          "http://localhost:5050/products"
-        );
+        const productRef = await axios.get("http://localhost:5050/products");
 
         setProducts(productRef.data);
       } catch (err) {
@@ -56,7 +54,7 @@ function App() {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       alert("Product Added Successfully!");
@@ -82,7 +80,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 py-12 px-6">
       <div className="max-w-7xl mx-auto">
-
         {/* Heading */}
         <h1 className="text-5xl font-bold text-center text-white mb-10">
           Product Management
@@ -94,10 +91,7 @@ function App() {
             Add New Product
           </h2>
 
-          <form
-            onSubmit={addProduct}
-            className="grid md:grid-cols-3 gap-5"
-          >
+          <form onSubmit={addProduct} className="grid md:grid-cols-3 gap-5">
             <input
               type="text"
               name="name"
@@ -108,7 +102,7 @@ function App() {
             />
 
             <input
-              type="text"
+              type="number"
               name="price"
               value={newProductform.price}
               placeholder="Product Price"
@@ -146,6 +140,9 @@ function App() {
                   src={product.imageurl}
                   alt={product.name}
                   className="object-contain h-full w-full"
+                  onError={(e) => {
+                    console.log("Image failed:", product.imageurl);
+                  }}
                 />
               </div>
 
@@ -179,4 +176,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
